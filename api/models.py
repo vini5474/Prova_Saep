@@ -6,11 +6,11 @@ class Produto(models.Model):
     descricao = models.TextField()
     quantidade = models.IntegerField()
     preco = models.FloatField()
-    estoque = models.IntegerField()
+    estoque_minimo = models.IntegerField()
 
 class Movimentacao(models.Model):
-    produto_id = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    tipo = models.CharField(max_length=255)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    tipo = models.CharField(max_length=17)
     quantidade = models.IntegerField()
-    usuario_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    data_operacao = models.DateTimeField()
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    data_movimentacao = models.DateTimeField(auto_now_add=True)
