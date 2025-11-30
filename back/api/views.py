@@ -33,7 +33,6 @@ class MovimentacaoViewSet(ListCreateAPIView):
         qtd_mov = serializer.validated_data["quantidade"]
         tipo = serializer.validated_data["tipo"]
 
-        # atualiza o estoque
         if tipo == "entrada":
             produto.quantidade = F('quantidade') + qtd_mov
         else:
@@ -48,5 +47,5 @@ class MovimentacaoViewSet(ListCreateAPIView):
             usuario=request.user,
         )
 
-        out = MovimentacaoSerializer(movimentacao)
-        return Response(out.data, status=status.HTTP_201_CREATED)
+        saida = MovimentacaoSerializer(movimentacao)
+        return Response(saida.data, status=status.HTTP_201_CREATED)

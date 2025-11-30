@@ -4,9 +4,10 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView
 )
 from .views import ProdutoView, MovimentacaoViewSet
+from .serializer import TokenObtainPairSerializer
 
 urlpatterns = [
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/', TokenObtainPairView.as_view(serializer_class=TokenObtainPairSerializer), name='token_obtain_pair'),
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('produtos/', ProdutoView.as_view()),

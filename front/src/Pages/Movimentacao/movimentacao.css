@@ -1,0 +1,82 @@
+/* Container principal ocupando toda a tela */
+.mov-container {
+    min-height: 100vh;
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    box-sizing: border-box;
+}
+
+/* Caixa de formulário e tabela centralizada */
+.mov-box {
+    width: 90%;
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+/* Formulário de movimentação */
+.mov-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.mov-form label {
+    flex-basis: 100%;
+    font-weight: bold;
+}
+
+.mov-form select,
+.mov-form input {
+    flex: 1 1 30%;
+    padding: 0.7rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.mov-form button {
+    flex-basis: 100%;
+    padding: 0.8rem;
+    background-color: #1e3a8a;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.mov-form button:hover {
+    background-color: #162c65;
+}
+
+/* Tabela de movimentações */
+.mov-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.mov-table th, .mov-table td {
+    border: 1px solid #ccc;
+    padding: 0.7rem;
+    text-align: center;
+}
+
+.mov-table th {
+    background-color: #1e3a8a;
+    color: #fff;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .mov-form select,
+    .mov-form input {
+        flex: 1 1 100%;
+    }
+}

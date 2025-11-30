@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Produto, Movimentacao
 from django.contrib.auth.models import User 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,3 +32,10 @@ class MovimentacaoSerializer(serializers.ModelSerializer):
         request = self.context['request']
         validated_data['usuario'] = request.user
         return super().create(validated_data)
+    
+class TokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['username'] = user.username
+        return token

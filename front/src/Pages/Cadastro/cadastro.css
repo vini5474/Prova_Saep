@@ -1,0 +1,81 @@
+.cadastro-container {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cadastro-box {
+    background: #ffffff;
+    padding: 50px 40px;
+    width: 400px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.cadastro-box h1 {
+    color: #1e3a8a;
+    margin-bottom: 30px;
+}
+
+.cadastro-box form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.cadastro-box form input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 6px rgba(59, 130, 246, 0.4);
+}
+
+.botoes {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.botoes button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botoes button[type="submit"] {
+    background: #1e3a8a;
+    color: #fff;
+}
+
+.botoes button[type="submit"]:hover {
+    background: #162c65;
+}
+
+.botoes button[type="button"] {
+    background: #b91c1c;
+    color: #fff;
+}
+
+.botoes button[type="button"]:hover {
+    background: #8a1616;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
