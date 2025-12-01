@@ -1,3 +1,7 @@
+body {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+}
+
 .cadastro-container {
     width: 100%;
     height: 100vh;
@@ -5,13 +9,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .cadastro-box {
     background: #ffffff;
-    padding: 50px 40px;
+    padding: 70px 70px;
     width: 400px;
     border-radius: 18px;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);

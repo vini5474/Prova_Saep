@@ -4,7 +4,7 @@ from django.db import transaction
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import Produto, Movimentacao
 from .serializer import ProdutoSerializer, MovimentacaoSerializer
 
@@ -18,6 +18,11 @@ class ProdutoView(ListCreateAPIView):
         produtos = Produto.objects.filter(quantidade__lt=F('estoque_minimo'))
         serializer = self.get_serializer(produtos, many=True)
         return Response(serializer.data)
+    
+class ProdutoDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = Produto.objects.all()
+    serializer_class = ProdutoSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 class MovimentacaoViewSet(ListCreateAPIView):
     queryset = Movimentacao.objects.all().order_by('-data_movimentacao')
@@ -52,3 +57,4 @@ class MovimentacaoViewSet(ListCreateAPIView):
 
         saida = MovimentacaoSerializer(movimentacao)
         return Response(saida.data, status=status.HTTP_201_CREATED)
+    

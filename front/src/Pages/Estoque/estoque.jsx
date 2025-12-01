@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {FaTrash, FaPlus} from 'react-icons/fa'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,26 +10,55 @@ export default function Estoque() {
     const [filtro, setFiltro] = useState('')
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
+    const alertShown = useRef(false);
 
     useEffect(() => {
         if (!token) return
-        
+
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/produtos/',
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                )
+                const response = await axios.get('http://127.0.0.1:8000/api/produtos/', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+
                 setDados(response.data)
+
+                const produtosCriticos = response.data.filter(
+                    (p) => p.quantidade < p.estoque_minimo
+                )
+
+                if (!alertShown.current && produtosCriticos.length > 0) {
+                    alertShown.current = true
+
+                    const nomes = produtosCriticos.map((p) => p.nome).join(', ')
+                    alert(`Atenção! Estoque baixo para os seguintes produtos: ${nomes}`)
+                }
             } catch (error) {
                 console.log(error)
             }
         }
+
         fetchData()
     }, [])
+
+
+
+    const apagar = async (id) => {
+        if (window.confirm("Tem certeza que deseja apagar ?")) {
+            try {
+                await axios.delete(`http://127.0.0.1:8000/api/produtos/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                setDados(dados.filter((produto) => produto.id !== id))
+            } catch (error) {
+                console.log("Error:", error)
+            }
+        }
+    }
 
     return (
         <>
@@ -42,7 +71,7 @@ export default function Estoque() {
                     <div className="top-bar">
                         <input
                             type="text"
-                            placeholder="Pesquisar produto..."
+                            placeholder="Pesquisar produto por nome:"
                             value={filtro}
                             onChange={(e) => setFiltro(e.target.value)}
                         />
@@ -81,7 +110,7 @@ export default function Estoque() {
                                         <td>R$ {item.preco}</td>
                                         <td>{item.estoque_minimo}</td>
                                         <td>
-                                            <button className="delete-btn">
+                                            <button className="delete-btn" onClick={() => apagar(item.id)}>
                                                 <FaTrash />
                                             </button>
                                         </td>
