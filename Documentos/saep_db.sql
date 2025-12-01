@@ -11,7 +11,7 @@ CREATE TABLE produto (
 
 CREATE TABLE movimnetacao (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	produto_id INT,
+	produto_id INT NOT NULL,
     tipo VARCHAR(10),
     quantidade INT,
     usuario_id INT,

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from "react";
-import {FaTrash, FaPlus} from 'react-icons/fa'
+import {FaTrash, FaPlus, FaEdit} from 'react-icons/fa'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './estoque.css'
@@ -90,7 +90,8 @@ export default function Estoque() {
                                 <th>Quantidade</th>
                                 <th>Preço</th>
                                 <th>Estoque Mínimo</th>
-                                <th>Ações</th>
+                                <th>Editar</th>
+                                <th>Deletar</th>
                             </tr>
                         </thead>
 
@@ -99,6 +100,7 @@ export default function Estoque() {
                                 .filter(item =>
                                     item.nome.toLowerCase().includes(filtro.toLowerCase())
                                 )
+                                .sort((a, b) => a.nome.localeCompare(b.nome))
                                 .map((item) => (
                                     <tr key={item.id}>
                                         <td>{item.id}</td>
@@ -109,6 +111,11 @@ export default function Estoque() {
                                         </td>
                                         <td>R$ {item.preco}</td>
                                         <td>{item.estoque_minimo}</td>
+                                        <td>
+                                            <button className="edit-btn" onClick={() => navigate(`/cadastro/${item.id}`)}>
+                                                <FaEdit />
+                                            </button>
+                                        </td>
                                         <td>
                                             <button className="delete-btn" onClick={() => apagar(item.id)}>
                                                 <FaTrash />

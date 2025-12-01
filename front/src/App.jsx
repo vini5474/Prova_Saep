@@ -14,6 +14,7 @@ export default function App() {
         <Route path="/home" element={<Home/>}/>
         <Route path="/estoque" element={<Estoque/>}/>
         <Route path="/cadastro" element={<Cadastro/>}/>
+        <Route path="/cadastro/:id" element={<Cadastro/>}/>
         <Route path="/movimentacao" element={<Movimentacao/>}/>
       </Routes>
     </Router>

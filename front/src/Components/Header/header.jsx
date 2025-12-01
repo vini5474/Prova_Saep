@@ -36,6 +36,7 @@ export default function Header() {
             <nav className="header-nav">
                 <ul className="nav-menu">
                     <li onClick={() => navigate('/estoque')}>Estoque</li>
+                    <li onClick={() => navigate('/Home')}>Home</li>
                     <li onClick={() => navigate('/cadastro')}>Cadastro de produtos</li>
                     <li onClick={() => navigate('/movimentacao')}>Fazer movimentação</li>
                     <li className="logout" onClick={logout}><CiLogout size={24} /></li>

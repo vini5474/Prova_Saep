@@ -99,6 +99,20 @@
     background: #8a1616;
 }
 
+.edit-btn {
+    background: #1c65b9;
+    padding: 8px 12px;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.edit-btn:hover {
+    background: #163b8a;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
