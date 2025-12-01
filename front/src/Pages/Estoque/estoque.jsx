@@ -7,9 +7,9 @@ import Header from '../../Components/Header/header'
 
 export default function Estoque() {
     const [dados, setDados] = useState([])
+    const [filtro, setFiltro] = useState('')
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
-    const [filtro, setFiltro] = useState('')
 
     useEffect(() => {
         if (!token) return
@@ -37,7 +37,7 @@ export default function Estoque() {
 
             <main className="estoque-container">
                 <div className="estoque-box">
-                    <h1>Estoque</h1>
+                    <h1>Estoque de Produtos</h1>
 
                     <div className="top-bar">
                         <input
@@ -75,7 +75,9 @@ export default function Estoque() {
                                         <td>{item.id}</td>
                                         <td>{item.nome}</td>
                                         <td>{item.descricao}</td>
-                                        <td>{item.quantidade}</td>
+                                        <td>{item.quantidade}
+                                            {item.quantidade < item.estoque_minimo && (<span className="alerta-estoque">Estoque Baixo</span>)}
+                                        </td>
                                         <td>R$ {item.preco}</td>
                                         <td>{item.estoque_minimo}</td>
                                         <td>

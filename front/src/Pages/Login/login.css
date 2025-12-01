@@ -60,6 +60,11 @@
     background: #162c65;
 }
 
+.login-box #alert {
+    color: #000000;
+    font-size: 21px;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }

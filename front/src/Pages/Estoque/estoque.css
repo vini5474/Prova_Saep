@@ -80,6 +80,12 @@
     background: #f0f4ff;
 }
 
+.alerta-estoque {
+    color: red;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
 .delete-btn {
     background: #b91c1c;
     padding: 8px 12px;

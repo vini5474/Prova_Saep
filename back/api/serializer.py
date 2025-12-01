@@ -22,10 +22,14 @@ class ProdutoSerializer(serializers.ModelSerializer):
 
 class MovimentacaoSerializer(serializers.ModelSerializer):
     usuario = serializers.ReadOnlyField(source='usuario.username')
+    produto = ProdutoSerializer(read_only=True)
+    produto_id = serializers.PrimaryKeyRelatedField(
+        queryset = Produto.objects.all(), source='produto', write_only=True
+    )
 
     class Meta:
         model = Movimentacao
-        fields = '__all__'
+        fields = ['id', 'produto', 'produto_id', 'tipo', 'quantidade', 'usuario', 'data_movimentacao']
         read_only_fields = ['usuario']
 
     def create(self, validated_data):
@@ -33,7 +37,7 @@ class MovimentacaoSerializer(serializers.ModelSerializer):
         validated_data['usuario'] = request.user
         return super().create(validated_data)
     
-class TokenObtainPairSerializer(TokenObtainPairSerializer):
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)

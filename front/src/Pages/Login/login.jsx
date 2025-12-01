@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
+    const [alert, setAlert] = useState('')
     const navigate = useNavigate()
 
     const logar = async () => {
@@ -23,6 +24,12 @@ export default function Login() {
         }
         catch (error) {
             console.log(error);
+            if (error.response.request.status == 401) {
+                setAlert("Usuário ou senha inválidos")
+            }
+            if (error.response.request.status == 400) {
+                setAlert("Preencha dos campos")
+            }
         }
     }
 
@@ -46,6 +53,7 @@ export default function Login() {
                 />
 
                 <button onClick={logar}>Entrar</button>
+                {alert && <p id='alert'>{alert}</p>}
             </div>
         </div>
     )

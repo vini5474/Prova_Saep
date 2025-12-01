@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './movimentacao.css'
+import Header from '../../Components/Header/header'
 
 export default function Movimentacao() {
     const [produtos, setProdutos] = useState([])
@@ -39,7 +40,7 @@ export default function Movimentacao() {
 
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/movimentacao/', {
-                produto: produtoId,
+                produto_id: produtoId,
                 tipo,
                 quantidade: parseInt(quantidade)
             }, {
@@ -59,58 +60,64 @@ export default function Movimentacao() {
     }
 
     return (
-        <div className="mov-container">
-            <h2>Registrar Movimentação</h2>
+        <>
+            <Header/>
 
-            <form className="mov-form" onSubmit={handleSubmit}>
-                <label>Produto:</label>
-                <select value={produtoId} onChange={e => setProdutoId(e.target.value)}>
-                    <option value="">Selecione um produto</option>
-                    {produtos.map(p => (
-                        <option key={p.id} value={p.id}>{p.nome}</option>
-                    ))}
-                </select>
+            <div className="mov-container">
+                <div className="mov-box">
+                    <h2>Registrar Movimentação</h2>
 
-                <label>Tipo:</label>
-                <select value={tipo} onChange={e => setTipo(e.target.value)}>
-                    <option value="entrada">Entrada</option>
-                    <option value="saida">Saída</option>
-                </select>
+                    <form className="mov-form" onSubmit={handleSubmit}>
+                        <label>Produto:</label>
+                        <select value={produtoId} onChange={e => setProdutoId(e.target.value)}>
+                            <option value="">Selecione um produto</option>
+                            {produtos.map(p => (
+                                <option key={p.id} value={p.id}>{p.nome}</option>
+                            ))}
+                        </select>
 
-                <label>Quantidade:</label>
-                <input 
-                    type="number" 
-                    value={quantidade} 
-                    onChange={e => setQuantidade(e.target.value)} 
-                    min="1"
-                />
+                        <label>Tipo:</label>
+                        <select value={tipo} onChange={e => setTipo(e.target.value)}>
+                            <option value="entrada">Entrada</option>
+                            <option value="saida">Saída</option>
+                        </select>
 
-                <button type="submit">Registrar</button>
-            </form>
+                        <label>Quantidade:</label>
+                        <input 
+                            type="number" 
+                            value={quantidade} 
+                            onChange={e => setQuantidade(e.target.value)} 
+                            min="1"
+                        />
 
-            <h3>Movimentações Recentes</h3>
-            <table className="mov-table">
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Tipo</th>
-                        <th>Quantidade</th>
-                        <th>Usuário</th>
-                        <th>Data</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {movimentacoes.map(m => (
-                        <tr key={m.id}>
-                            <td>{m.produto.nome}</td>
-                            <td>{m.tipo}</td>
-                            <td>{m.quantidade}</td>
-                            <td>{m.usuario}</td>
-                            <td>{new Date(m.data_movimentacao).toLocaleString()}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+                        <button type="submit">Registrar</button>
+                    </form>
+
+                    <h3>Movimentações Recentes</h3>
+                    <table className="mov-table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Tipo</th>
+                                <th>Quantidade</th>
+                                <th>Usuário</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {movimentacoes.map(m => (
+                                <tr key={m.id}>
+                                    <td>{m.produto.nome}</td>
+                                    <td>{m.tipo}</td>
+                                    <td>{m.quantidade}</td>
+                                    <td>{m.usuario}</td>
+                                    <td>{new Date(m.data_movimentacao).toLocaleString()}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </>
     )
 }

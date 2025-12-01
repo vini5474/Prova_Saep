@@ -30,7 +30,7 @@ export default function Header() {
     return (
         <header className="header-container">
             <div className="header-left">
-                <h1>{nomeUsuario}</h1>
+                <h1>Usuário logado: {nomeUsuario}</h1>
             </div>
 
             <nav className="header-nav">

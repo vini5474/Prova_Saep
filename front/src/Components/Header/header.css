@@ -11,6 +11,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header-left h1 {

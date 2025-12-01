@@ -33,13 +33,16 @@ class MovimentacaoViewSet(ListCreateAPIView):
         qtd_mov = serializer.validated_data["quantidade"]
         tipo = serializer.validated_data["tipo"]
 
+       # Atualiza o estoque
         if tipo == "entrada":
-            produto.quantidade = F('quantidade') + qtd_mov
+            Produto.objects.filter(id=produto.id).update(quantidade=F('quantidade') + qtd_mov)
         else:
-            produto.quantidade = F('quantidade') - qtd_mov
+            Produto.objects.filter(id=produto.id).update(quantidade=F('quantidade') - qtd_mov)
 
-        produto.save()
+        # Recarrega o produto atualizado
+        produto.refresh_from_db()
 
+        # Cria a movimentação
         movimentacao = Movimentacao.objects.create(
             produto=produto,
             tipo=tipo,
