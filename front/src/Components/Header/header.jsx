@@ -46,7 +46,6 @@ export default function Header() {
     )
 }
 
-// decodificar token
 function parseJwt(token) {
     try {
         const base64Url = token.split('.')[1]

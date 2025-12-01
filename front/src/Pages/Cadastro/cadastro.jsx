@@ -31,7 +31,6 @@ export default function Cadastro() {
 
         try {
             if (id) {
-                // Atualizar produto existente
                 await axios.put(
                     `http://127.0.0.1:8000/api/produtos/${id}`,
                     dados,

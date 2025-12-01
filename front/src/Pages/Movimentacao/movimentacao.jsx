@@ -11,7 +11,6 @@ export default function Movimentacao() {
     const [quantidade, setQuantidade] = useState(0)
     const token = localStorage.getItem('token')
 
-    // Buscar produtos para o select
     useEffect(() => {
         if (!token) return
 
@@ -22,7 +21,6 @@ export default function Movimentacao() {
         .catch(err => console.log(err))
     }, [])
 
-    // Buscar movimentações recentes
     useEffect(() => {
         if (!token) return
 
@@ -33,7 +31,6 @@ export default function Movimentacao() {
         .catch(err => console.log(err));
     }, []);
 
-    // Criar movimentação
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!produtoId || quantidade <= 0) return alert("Preencha todos os campos corretamente.")
@@ -47,9 +44,7 @@ export default function Movimentacao() {
                 headers: { Authorization: `Bearer ${token}` }
             })
 
-            // Atualiza lista de movimentações
             setMovimentacoes([response.data, ...movimentacoes])
-            // Reseta formulário
             setProdutoId("");
             setQuantidade(0);
             setTipo("entrada");
